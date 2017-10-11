@@ -1,0 +1,239 @@
+// var
+@gr: #f4f4f4;
+@text: #666666;
+
+// mixin
+.box-shadow {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.el {
+    border-radius: 4px;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0px 2px 9px #d0d0d0;
+}
+
+// form
+input {
+    width: 255px;
+    height: 33px;
+    border: none;
+    font-size: 100%;
+    padding: 4px;
+    .el();
+}
+
+header {
+    background: @gr;
+    padding: 15px 0;
+    .box-shadow();
+}
+
+.s-container {
+    padding: 0 60px;
+    .clearfix();
+}
+
+.s-search {
+    position: relative;
+    float: right;
+    &__btn {
+        color: #bebebe;
+        font-size: 18px;
+        display: inline-block;
+        margin-right: 5px;
+    }
+    .s-search__model {
+        max-width: 200px;
+    }
+    .s-search__close {
+        cursor: pointer;
+        font-size: 11px;
+        color: @text;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out;
+        &-active {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+.s-search-result {
+    position: absolute;
+    top: ~'calc(100% + 12px)';
+    right: -20px;
+    width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
+    &-active {
+        opacity: 1;
+        visibility: visible;
+    }
+    .el();
+    &__inner {
+        overflow-y: auto;
+        max-height: 435px;
+        padding: 4px;
+        z-index: 2;
+        background: white;
+        position: relative;
+        border-radius: 4px;
+    }
+    &__list {
+        padding: 5px;
+        &:not(:last-of-type) {
+            border-bottom: 1px solid @gr;
+        }
+        &-name {
+            font-weight: bold;
+            font-size: 13px;
+        }
+        &-date {
+            font-size: 11px;
+            color: @text;
+        }
+        &:hover {
+            background: #1c9dff;
+        }
+        &:hover &-name,
+        &:hover &-date {
+            color: white;
+        }
+    }
+}
+
+.s-arrow-popover {
+    z-index: 1;
+    &:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 0;
+        left: 15%;
+        border: 6px solid white;
+        border-color: white white;
+        transform-origin: 0 0;
+        transform: rotate(133deg);
+        box-shadow: -1px 1px 4px 0 #d0d0d0;
+        z-index: 0;
+    }
+}
+
+.s-date {
+    padding: 20px 0;
+}
+
+.s-month {
+    display: flex;
+    align-items: center;
+    &__current {
+        padding: 4px 10px 0;
+        font-weight: 700;
+    }
+    &__btn {
+        &:not(&--current) {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            text-align: center;
+            color: #000;
+            .fa {
+                font-size: 11px;
+            }
+        }
+        .el();
+        &--current {
+            margin-left: 5px;
+            color: @text;
+            padding: 0 5px;
+            height: 20px;
+            font-size: 11px;
+            display: inline-block;
+            line-height: 20px;
+        }
+    }
+}
+
+.s-week {
+    display: flex;
+    flex-wrap: wrap;
+    &__item {
+        width: calc(100%/7);
+        height: 150px;
+        border: 1px solid @gr;
+        padding: 5px;
+        @media (max-width: 767px) {
+            width: 100%;
+        }
+        &:hover {
+            border: 1px solid #86c0ef;
+            background: #e5f1fb;
+        }
+        &-event {
+            background: #c1e4ff;
+        }
+        &-week-date {
+            color: @text;
+            font-size: 11px;
+        }
+        &-week-data {
+            > div {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+.s-event {
+    position: absolute;
+    z-index: -1;
+    background: white;
+    opacity: 0;
+    visibility: hidden;
+    width: 300px;
+    padding: 20px;
+    margin: -35px 0 0 30px;
+    transition: opacity 0.3s ease-in-out;
+    top: 0;
+    .el();
+    &__active {
+        z-index: 10;
+        opacity: 1;
+        visibility: visible;
+    }
+    input,
+    textarea {
+        width: 100%;
+        margin-bottom: 5px;
+        display: block;
+    }
+    textarea {
+        font-size: 100%;
+        padding: 4px;
+        border-radius: 4px;
+        border: 1px solid #d0d0d0;
+    }
+    button {
+        padding: 4px;
+    }
+    &__space {
+        margin-bottom: 35px;
+    }
+    &__close {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 10px;
+        color: @text;
+    }
+}
